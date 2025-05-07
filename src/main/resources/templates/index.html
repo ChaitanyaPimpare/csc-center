@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSC Center</title>
+    <!-- <link rel="stylesheet" href="static/style.css"> -->
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color:  rgb(111, 138, 138);
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    
+    header {
+        background: #007bff;
+        padding: 10px;
+        color: white;
+    }
+    
+    nav ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    nav ul li {
+        display: inline;
+        margin: 0 10px;
+    }
+    
+    .hero {
+        background: #f4f4f4;
+        padding: 50px;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #007bff;
+        color: white;
+        text-decoration: none;
+    }
+    .contact {
+    padding: 0 5rem;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+}
+
+.contact-content {
+    display: flex;
+    margin: 3rem 0;
+    justify-content: space-between;
+}
+
+.contact-form-container {
+    width: 50%;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form .form-controls {
+    width: 80%;
+    padding: 10px 0;
+    margin: 1.67rem 0;
+}
+
+.contact-form .form-btn {
+    width: 83%;
+}
+
+.contact-details {
+    width: 50%;
+}
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to CSC Center</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/appointments">Book Appointment</a></li>
+                <a class="links" href="#contact">
+                    Contact  Me
+                </a>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Digital Services at Your Fingertips</h2>
+        <a href="/appointments" class="btn">Book an Appointment</a>
+    </section>
+    <section class="contact" id="contact">
+        <div class="contact-heading">
+            <h1 class="my-heading text-center">Contact Me</h1>
+        </div>
+        <div class="contact-content">
+            <div class="contact-form-container">
+                <h1 class="greet-heading">Get In Touch</h1>
+                <form class="contact-form">
+                    <input class="form-controls" type="text" 
+                           placeholder="Your Name">
+                    <input class="form-controls" type="text" 
+                           placeholder="Your Email">
+                    <input class="form-controls" type="text" 
+                           placeholder="Your Phone">
+                    <textarea class="form-controls" 
+                              placeholder="Write your message" 
+                              name="message" id="" cols="30"
+                              rows="10">
+                      </textarea>
+                    <input class="form-btn btn common-btn" 
+                           type="submit" value="Send Message">
+                </form>
+            </div>
+            <div class="contact-details">
+                <h1 class="greet-heading">My Contact Details</h1>
+                <div class="details">
+                    <h5 class="contact-heading">EMAIL</h5>
+                    <p class="contact-text">chaitanyapimpare2003@gmail.com</p>
+                    <h5 class="contact-heading">COLLEGE EMAIL</h5>
+                    <p class="contact-text">chaitanya.pimpare.mca@ghrcem.raisoni.net</p>
+                </div>
+                <div class="details">
+                    <h5 class="contact-heading">PHONE</h5>
+                    <p class="contact-text">+91 7219110203</p>
+                </div>
+                <div class="details">
+                    <h5 class="contact-heading">TEMPORARY ADDRESS</h5>
+                    <p class="contact-text">AT/PO-Whagoli, </p>
+                    <p>Tal-haveli</p>
+                    <p>Dist-pune</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 CSC Center. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
