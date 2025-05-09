@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,19 +84,33 @@
         <h1>Welcome to CSC Center</h1>
         <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/services">Services</a></li>
-                <li><a href="/appointments">Book Appointment</a></li>
-                <a class="links" href="#contact">
-                    Contact  Me
-                </a>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/services}">Services</a></li>
+                <li th:if="${not #authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/appointments}">Book Appointment</a>
+                </li>
+                <li th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+                    <a th:href="@{/user/dashboard}">User Dashboard</a>
+                </li>
+                <li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <a th:href="@{/admin/dashboard}">Admin Dashboard</a>
+                </li>
+                <li th:if="${not #authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/login}">Login</a>
+                </li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
         <h2>Digital Services at Your Fingertips</h2>
-        <a href="/appointments" class="btn">Book an Appointment</a>
+        <a th:href="@{/appointments}" class="btn"
+           th:if="${not #authorization.expression('hasRole(''ROLE_USER'')')}">
+            Book an Appointment
+        </a>
     </section>
     <section class="contact" id="contact">
         <div class="contact-heading">

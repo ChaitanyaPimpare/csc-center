@@ -24,6 +24,7 @@ public class RegisterController {
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("users") User user) {
         // You can add validation here
+        user.setRole("ROLE_USER");
         userDetailsService.saveUser(user); // Assuming you have a method to save the user
         return "redirect:/login"; // Redirect to the login page after successful registration
     }

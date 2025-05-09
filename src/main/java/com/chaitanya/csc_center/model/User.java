@@ -3,6 +3,7 @@ package com.chaitanya.csc_center.model;
 import jakarta.persistence.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,12 +19,12 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String email;
-
+    private String role;
     // ✅ Required by UserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList(); // You can later add roles here
-    }
+    return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.toUpperCase()));
+}
 
     @Override
     public String getUsername() {
@@ -34,6 +35,10 @@ public class User implements UserDetails {
     public String getPassword() {
         return password;
     }
+    public String getRole() {
+        return role;
+    }
+    
 
     @Override
     public boolean isAccountNonExpired() { return true; }
@@ -66,4 +71,7 @@ public class User implements UserDetails {
     public String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

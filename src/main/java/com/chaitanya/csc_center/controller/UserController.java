@@ -1,12 +1,14 @@
 package com.chaitanya.csc_center.controller;
 
 import com.chaitanya.csc_center.model.User;
+
+import org.springframework.stereotype.Controller;
 import com.chaitanya.csc_center.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/users")
+@Controller
+@RequestMapping("/users")
 @CrossOrigin("*")
 public class UserController {
 
@@ -23,4 +25,10 @@ public class UserController {
         User validUser = userService.loginUser(user.getName(), user.getPassword());
         return (validUser != null) ? "Login Successful" : "Invalid credentials";
     }
+
+   @GetMapping("/dashboard")
+    public String showUserDashboard() {
+        return "user_dashboard"; // Corresponds to user_dashboard.html in templates
+    }
 }
+
