@@ -4,160 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSC Center</title>
-    <!-- <link rel="stylesheet" href="static/style.css"> -->
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color:  rgb(111, 138, 138);
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-    
-    header {
-        background: #007bff;
-        padding: 10px;
-        color: white;
-    }
-    
-    nav ul {
-        list-style: none;
-        padding: 0;
-    }
-    
-    nav ul li {
-        display: inline;
-        margin: 0 10px;
-    }
-    
-    .hero {
-        background: #f4f4f4;
-        padding: 50px;
-    }
-    
-    .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        background: #007bff;
-        color: white;
-        text-decoration: none;
-    }
-    .contact {
-    padding: 0 5rem;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
-}
-
-.contact-content {
-    display: flex;
-    margin: 3rem 0;
-    justify-content: space-between;
-}
-
-.contact-form-container {
-    width: 50%;
-}
-
-.contact-form {
-    display: flex;
-    flex-direction: column;
-}
-
-.contact-form .form-controls {
-    width: 80%;
-    padding: 10px 0;
-    margin: 1.67rem 0;
-}
-
-.contact-form .form-btn {
-    width: 83%;
-}
-
-.contact-details {
-    width: 50%;
-}
-
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 text-gray-800 font-sans">
 
-    <header>
-        <h1>Welcome to CSC Center</h1>
-        <nav>
-            <ul>
-                <li><a th:href="@{/}">Home</a></li>
-                <li><a th:href="@{/services}">Services</a></li>
-                <li th:if="${not #authorization.expression('isAuthenticated()')}">
-                    <a th:href="@{/appointments}">Book Appointment</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
-                    <a th:href="@{/user/dashboard}">User Dashboard</a>
-                </li>
-                <li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                    <a th:href="@{/admin/dashboard}">Admin Dashboard</a>
-                </li>
-                <li th:if="${not #authorization.expression('isAuthenticated()')}">
-                    <a th:href="@{/login}">Login</a>
-                </li>
-                <li th:if="${#authorization.expression('isAuthenticated()')}">
-                    <a th:href="@{/logout}">Logout</a>
-                </li>
-            </ul>
-        </nav>
+    <!-- Header -->
+    <header class="bg-blue-800 text-white py-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <h1 class="text-2xl font-bold">Welcome to CSC Center</h1>
+            <nav>
+                <ul class="flex space-x-4 text-white">
+                    <li><a class="hover:underline" th:href="@{/}">Home</a></li>
+                    <li><a class="hover:underline" th:href="@{/services}">Services</a></li>
+                    <li th:if="${not #authorization.expression('isAuthenticated()')}">
+                        <a class="hover:underline" th:href="@{/appointments}">Book Appointment</a>
+                    </li>
+                    <li th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+                        <a class="hover:underline" th:href="@{/user/dashboard}">User Dashboard</a>
+                    </li>
+                    <li th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                        <a class="hover:underline" th:href="@{/admin/dashboard}">Admin Dashboard</a>
+                    </li>
+                    <li th:if="${not #authorization.expression('isAuthenticated()')}">
+                        <a class="hover:underline" th:href="@{/login}">Login</a>
+                    </li>
+                    <li th:if="${#authorization.expression('isAuthenticated()')}">
+                        <a class="hover:underline" th:href="@{/logout}">Logout</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <section class="hero">
-        <h2>Digital Services at Your Fingertips</h2>
-        <a th:href="@{/appointments}" class="btn"
+    <!-- Hero -->
+    <section class="bg-blue-700 text-white text-center py-16">
+        <h2 class="text-3xl md:text-4xl font-semibold mb-4">Digital Services at Your Fingertips</h2>
+        <a th:href="@{/appointments}" class="mt-4 inline-block bg-white text-blue-800 font-semibold px-6 py-2 rounded hover:bg-gray-100 transition"
            th:if="${not #authorization.expression('hasRole(''ROLE_USER'')')}">
             Book an Appointment
         </a>
     </section>
-    <section class="contact" id="contact">
-        <div class="contact-heading">
-            <h1 class="my-heading text-center">Contact Me</h1>
-        </div>
-        <div class="contact-content">
-            <div class="contact-form-container">
-                <h1 class="greet-heading">Get In Touch</h1>
-                <form class="contact-form">
-                    <input class="form-controls" type="text" 
-                           placeholder="Your Name">
-                    <input class="form-controls" type="text" 
-                           placeholder="Your Email">
-                    <input class="form-controls" type="text" 
-                           placeholder="Your Phone">
-                    <textarea class="form-controls" 
-                              placeholder="Write your message" 
-                              name="message" id="" cols="30"
-                              rows="10">
-                      </textarea>
-                    <input class="form-btn btn common-btn" 
-                           type="submit" value="Send Message">
-                </form>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="mb-10 text-center">
+                <h1 class="text-3xl font-bold text-blue-800">Contact Me</h1>
             </div>
-            <div class="contact-details">
-                <h1 class="greet-heading">My Contact Details</h1>
-                <div class="details">
-                    <h5 class="contact-heading">EMAIL</h5>
-                    <p class="contact-text">chaitanyapimpare2003@gmail.com</p>
-                    <h5 class="contact-heading">COLLEGE EMAIL</h5>
-                    <p class="contact-text">chaitanya.pimpare.mca@ghrcem.raisoni.net</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Contact Form -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold mb-4 text-blue-700">Get In Touch</h2>
+                    <form class="space-y-4 contact-form">
+                        <input class="w-full p-3 border border-gray-300 rounded" type="text" placeholder="Your Name">
+                        <input class="w-full p-3 border border-gray-300 rounded" type="text" placeholder="Your Email">
+                        <input class="w-full p-3 border border-gray-300 rounded" type="text" placeholder="Your Phone">
+                        <textarea class="w-full p-3 border border-gray-300 rounded" placeholder="Write your message" name="message" cols="30" rows="6"></textarea>
+                        <input class="bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800 transition cursor-pointer" type="submit" value="Send Message">
+                    </form>
                 </div>
-                <div class="details">
-                    <h5 class="contact-heading">PHONE</h5>
-                    <p class="contact-text">+91 7219110203</p>
-                </div>
-                <div class="details">
-                    <h5 class="contact-heading">TEMPORARY ADDRESS</h5>
-                    <p class="contact-text">AT/PO-Whagoli, </p>
-                    <p>Tal-haveli</p>
-                    <p>Dist-pune</p>
+                <!-- Contact Details -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold mb-4 text-blue-700">My Contact Details</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-500">EMAIL</h5>
+                            <p class="text-lg">chaitanyapimpare2003@gmail.com</p>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-500">COLLEGE EMAIL</h5>
+                            <p class="text-lg">chaitanya.pimpare.mca@ghrcem.raisoni.net</p>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-500">PHONE</h5>
+                            <p class="text-lg">+91 7219110203</p>
+                        </div>
+                        <div>
+                            <h5 class="text-sm font-medium text-gray-500">TEMPORARY ADDRESS</h5>
+                            <p class="text-lg">AT/PO-Whagoli, Tal-haveli, Dist-pune</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white text-center py-4">
         <p>© 2025 CSC Center. All rights reserved.</p>
     </footer>
 

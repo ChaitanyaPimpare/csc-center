@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/admin/services") // Accessible only by admin
 public class AdminServiceController {
@@ -22,6 +23,11 @@ public class AdminServiceController {
     @PostMapping
     public CSCService addService(@RequestBody CSCService service) {
         return serviceService.addService(service);
+    }
+
+    @GetMapping("/{id}")
+    public CSCService getServiceById(@PathVariable Long id) {
+        return serviceService.getServiceById(id);
     }
 
     @DeleteMapping("/{id}")

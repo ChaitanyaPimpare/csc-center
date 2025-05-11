@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 @CrossOrigin("*")
 public class UserController {
 
@@ -31,4 +31,3 @@ public class UserController {
         return "user_dashboard"; // Corresponds to user_dashboard.html in templates
     }
 }
-

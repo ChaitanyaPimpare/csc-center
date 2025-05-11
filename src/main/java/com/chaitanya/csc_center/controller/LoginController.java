@@ -9,4 +9,9 @@ public class LoginController {
     public String loginPage() {
         return "login"; // This should match login.html in /resources/templates/
     }
+     @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "access_denied"; // this should match access_denied.html
+    }
 }
+
