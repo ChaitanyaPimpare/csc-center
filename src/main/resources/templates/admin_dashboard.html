@@ -9,8 +9,18 @@
     <style>
         body { font-family: Arial, sans-serif; background-color: #eef; text-align: center; }
         header { background: #333; color: white; padding: 1rem; }
-        nav ul { list-style: none; padding: 0; }
-        nav ul li { display: inline-block; margin: 0 15px; }
+        nav ul {
+            display: flex; 
+            list-style: none; 
+            padding: 0;
+            justify-content: flex-end;
+             
+        }
+        nav ul li { 
+            display: inline-block; 
+            margin: 0 15px;
+            
+         }
         a { color: white; text-decoration: none; }
     </style>
 
@@ -27,8 +37,9 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/admin/users">Manage Users</a></li>
-                <li><a href="/admin/reports">Reports</a></li>
+                <!-- <li><a href="/admin/users">Manage Users</a></li> -->
+                <!-- <li><a href="/admin/reports">Reports</a></li> -->
+                <li><a href="/admin/services/add">Add Service</a></li> <!-- NEW LINK -->
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
@@ -38,137 +49,7 @@
         <h2>Admin Dashboard</h2>
         <p>Here you can manage users, services, and appointments.</p>
 
-        <div class="container mt-5">
-            <h1 class="mb-4">Admin: Manage Services</h1>
-
-            <!-- Form to add a new service -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Add New Service</h5>
-                    <form id="addServiceForm">
-                        <div class="mb-3">
-                            <label for="serviceName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="serviceName" name="name" required />
-                        </div>
-                        <div class="mb-3">
-                            <label for="serviceDescription" class="form-label">Description</label>
-                            <textarea class="form-control" id="serviceDescription" name="description" rows="3" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="servicePrice" class="form-label">Price</label>
-                            <input type="number" step="1" class="form-control" id="servicePrice" name="price" required />
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add Service</button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Services table -->
-            <h2 class="mt-4">Existing Services</h2>
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="servicesTableBody"></tbody>
-                </table>
-            </div>
-        </div>
+          
     </section>
-
-    <script>
-        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
-
-        // Fetch and display all services
-        function fetchServices() {
-            fetch('/admin/services')
-                .then(response => response.json())
-                .then(services => {
-                    const tableBody = document.getElementById('servicesTableBody');
-                    tableBody.innerHTML = '';
-                    services.forEach(service => {
-                        const row = tableBody.insertRow();
-                        row.insertCell(0).textContent = service.name;
-                        row.insertCell(1).textContent = service.description;
-                        row.insertCell(2).textContent = service.price;
-                        const actionCell = row.insertCell(3);
-
-                        const deleteButton = document.createElement('button');
-                        deleteButton.textContent = 'Delete';
-                        deleteButton.className = 'btn btn-danger btn-sm';
-                        deleteButton.addEventListener('click', () => {
-                            deleteService(service.id);
-                        });
-
-                        actionCell.appendChild(deleteButton);
-                    });
-                })
-                .catch(error => console.error('Error fetching services:', error));
-        }
-
-        // Add service
-        document.getElementById('addServiceForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const name = document.getElementById('serviceName').value.trim();
-            const description = document.getElementById('serviceDescription').value.trim();
-            const price = parseFloat(document.getElementById('servicePrice').value);
-
-            const serviceData = { name, description, price };
-
-            fetch('/admin/services', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    [csrfHeader]: csrfToken
-                },
-                body: JSON.stringify(serviceData)
-            })
-            .then(response => {
-                if (response.ok) {
-                    document.getElementById('addServiceForm').reset();
-                    fetchServices();
-                } else {
-                    return response.text().then(text => { throw new Error(text) });
-                }
-            })
-            .catch(error => {
-                console.error('Error adding service:', error);
-                alert('Failed to add service: ' + error.message);
-            });
-        });
-
-        // Delete service
-        function deleteService(serviceId) {
-            if (!confirm('Are you sure you want to delete this service?')) return;
-
-            fetch(`/admin/services/${serviceId}`, {
-                method: 'DELETE',
-                headers: {
-                    [csrfHeader]: csrfToken
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    fetchServices();
-                } else {
-                    return response.text().then(text => { throw new Error(text) });
-                }
-            })
-            .catch(error => {
-                console.error('Error deleting service:', error);
-                alert('Failed to delete service: ' + error.message);
-            });
-        }
-
-        // Initial fetch
-        fetchServices();
-    </script>
 </body>
 </html>

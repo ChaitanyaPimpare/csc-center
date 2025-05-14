@@ -16,8 +16,11 @@ public class AppointmentService {
 
     public Appointment bookAppointment(Appointment appointment) {
         appointment.setStatus("Pending"); // Default status
-        return appointmentRepository.save(appointment);
+        return appointmentRepository.save(appointment); 
     }
+    public Appointment save(Appointment appointment) {
+    return appointmentRepository.save(appointment);
+}
 
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
@@ -25,6 +28,7 @@ public class AppointmentService {
 
     public Optional<Appointment> getAppointmentById(Long id) {
         return appointmentRepository.findById(id);
+        
     }
 
     public Appointment updateAppointmentStatus(Long id, String status) {

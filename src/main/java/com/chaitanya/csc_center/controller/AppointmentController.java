@@ -3,6 +3,7 @@ package com.chaitanya.csc_center.controller;
 import com.chaitanya.csc_center.model.Appointment;
 import com.chaitanya.csc_center.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,12 +16,18 @@ public class AppointmentController {
 
     @Autowired
     private AppointmentService appointmentService;
+       @PostMapping
+    public ResponseEntity<Appointment> createAppointment(@RequestBody Appointment appointment) {
+        Appointment saved = appointmentService.save(appointment);
+        return ResponseEntity.ok(saved);
+    }
+
 
     @PostMapping("/book")
     public Appointment bookAppointment(@RequestBody Appointment appointment) {
         return appointmentService.bookAppointment(appointment);
     }
-
+    
     @GetMapping("/")
     public List<Appointment> getAllAppointments() {
         return appointmentService.getAllAppointments();

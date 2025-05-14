@@ -11,7 +11,7 @@ public class HomeController {
     }
 
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String indexPage() {
         return "index";  // Loads index.html after successful login
     }

@@ -22,6 +22,11 @@ public class AdminController {
         return "admin_dashboard"; // Corresponds to admin_dashboard.html in templates
     }
 
+    @GetMapping("/services/add")
+    public String showAddServicePage() {
+        return "add_service"; // add_service.html (Thymeleaf page)
+    }
+
     // View all users (for the admin)
     @GetMapping("/users")
     public String viewUsers(Model model) {
@@ -29,6 +34,7 @@ public class AdminController {
         model.addAttribute("users", users);
         return "admin_users";  // returns a view to display users
     }
+
 
     // Add a new user
     @GetMapping("/addUser")
